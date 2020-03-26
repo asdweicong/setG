@@ -1,0 +1,20 @@
+var filter = {
+  sizeFilter: function (value) {
+    if(value){
+      return '小'
+    }else{
+      return '大'
+    }
+  },
+  singleAndDoubleFilter: function (value) {
+    if(value){
+      return '双'
+    }else{
+      return '单'
+    }
+  }
+}
+module.exports = {
+  sizeFilter: filter.sizeFilter,
+  singleAndDoubleFilter: filter.singleAndDoubleFilter
+}

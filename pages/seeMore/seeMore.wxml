@@ -1,6 +1,5 @@
-<!--pages/seeMore/seeMore.wxml-->
-<!-- //wx:for="{{这里是要循环的数组}}" wx:key={{i}}这个的作用就是给数组唯一的标识。 -->
+<wxs module="filter" src="../../utils/filter.wxs"></wxs>
 <view class='item' wx:for="{{setGData._data}}">
-<!-- //item就是数组的每一项，index就是数组的下标（如果是对象就是对象的属性名） -->
-  <view>{{item}}</view>
+  <!-- <view>value：{{item.value}}  大/小：{{sizeFilter(item.size)}}  单/双：{{singleAndDoubleFilter(item.singleAndDouble)}}</view> -->
+  <view>value：{{item.value}}{{item.size}}{{item.singleAndDouble}}{{item.win}}</view>
 </view>

@@ -1,13 +1,14 @@
 <!--pages/setG/setG.wxml-->
+<!-- <wxs module="filter" src="../../utils/filter.wxs"></wxs> -->
 <input type="text" value="{{searchCode}}" confirm-type="search" bindconfirm="getSearchResult" bindblur="getSearchValue" bindinput="getSearchInput"></input>
 <button bindtap="bindViewTapSetG" style="width:50%;float:left">添加</button>
 <button bindtap="bindViewTapDeleteSetG" style="width:50%;float:right">清除缓存</button>
 <view>下期投注：</view>
 <view>单期数量：{{setGData.a}}</view>
 <view>叠加倍数：{{setGData.b}}</view>
-<view>循环期数：{{setGData.c}}</view>
+<view>循环期数：{{setGData.c.value}}</view>
 <view>总回报：{{setGData.d}}</view>
-<view>单双：{{setGData.e}}</view>
-<view>大小：{{setGData.f}}</view>
+<view>单双：{{setGData.e.value}}</view>
+<view>大小：{{setGData.f.value}}</view>
 
 <button bindtap="bindViewTapDetail" style="width:50%;float:right">进入详情</button>
