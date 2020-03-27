@@ -1,1 +1,6 @@
 /* pages/setG/setG.wxss */
+.searchCode{
+  height: 36px;
+  padding: 2px 8px;
+  border: 1px red solid;
+}
