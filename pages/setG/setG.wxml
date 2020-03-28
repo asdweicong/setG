@@ -8,19 +8,19 @@
 <radio-group class="radio-group" bindchange="radioChange">
 	<view>
 		单期数量：{{setGData.a}}
-		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[0]}}" checked=""></radio>
+		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[0]}}"></radio>
 	</view>
 	<view>
 		叠加倍数：{{setGData.b}}
-		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[1]}}" checked=""></radio>
+		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[1]}}"></radio>
 	</view>
 	<view>
 		循环期数：{{setGData.j}}
-		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[2]}}" checked=""></radio>
+		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[2]}}"></radio>
 	</view>
 	<view>
 		循环轮数：{{setGData.k}}
-		<radio class='radio' style='margin-left: 11px;' value="{{checked.num[3]}}" checked=""></radio>
+		<radio class='radio' style='margin-left: 11px;' value="{{checked.num[3]}}"></radio>
 	</view>
 </radio-group>
 

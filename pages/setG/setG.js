@@ -88,12 +88,9 @@ Page({
     console.log(getG('bindViewTapSetG'))
   },
   radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value);
-    var data = {
-      checked:{
-        value:e.detail.value,
-      }
-    }
+    console.log('radio发生change事件，携带value值为：', e.detail.value,this.data.checked,e);
+    var data = this.data.checked
+     data.value = e.detail.value,
     this.setData(data)
   },
   getSearchInput(e) {
@@ -111,8 +108,8 @@ Page({
     var data = this.data;
     var checked = this.data.checked;
     var changeValue = this.data.changeValue;
+    console.log(checked.value)
     checked.value = parseInt(checked.value);
-    console.log(checked.value,typeof checked.value)
     switch (checked.value){
       case 1:{
         data.setGData.a = changeValue
@@ -131,6 +128,7 @@ Page({
         break;
       }
     }
+    console.log(checked.value,changeValue,typeof checked.value,data.setGData)
     this.setData(data)
   },
   bindViewTapSetG: function () {
