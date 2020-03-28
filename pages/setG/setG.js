@@ -8,7 +8,6 @@ var setDefaultData = function () {
     j: 2, //循环个数
     k: 2, //循环轮数
     c: {
-      value: 2,
       value_: 1,
       valueDefault: 1,
       next: false,
@@ -39,7 +38,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    searchCode: 1,
+    searchCode: '',
+    changeValue: '',
+    checked:{
+      value:1,
+      num:[1,2,3,4]
+    },
     setGData: new setDefaultData()
   },
   bindViewTapDetail: function () {
@@ -83,16 +87,50 @@ Page({
     };
     console.log(getG('bindViewTapSetG'))
   },
-
-  getSearchInput(e) {
-    this.searchCode = e.detail.value;
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value);
+    var data = {
+      checked:{
+        value:e.detail.value,
+      }
+    }
+    this.setData(data)
   },
-  getSearchValue() {
-    this.getSaveSearchValue('searchCode', this.searchCode)
+  getSearchInput(e) {
+    this[e.currentTarget.id] = e.detail.value;
+  },
+  getSearchValue(e) {
+    this.getSaveSearchValue(e.currentTarget.id, this[e.currentTarget.id])
   },
   getSaveSearchValue(name, value) { // 存值入栈
     var data = {};
     data[name] = value;
+    this.setData(data)
+  },
+  bindViewTapChange:function(){
+    var data = this.data;
+    var checked = this.data.checked;
+    var changeValue = this.data.changeValue;
+    checked.value = parseInt(checked.value);
+    console.log(checked.value,typeof checked.value)
+    switch (checked.value){
+      case 1:{
+        data.setGData.a = changeValue
+        break;
+      }
+      case 2:{
+        data.setGData.b = changeValue
+        break;
+      }
+      case 3:{
+        data.setGData.j = changeValue;
+        break;
+      }
+      case 4:{
+        data.setGData.k = changeValue;
+        break;
+      }
+    }
     this.setData(data)
   },
   bindViewTapSetG: function () {
@@ -116,7 +154,7 @@ Page({
     wx.setStorageSync('bindViewTapSetG', this.data.setGData)
   },
   setCAndE:function(setGData){
-    if (setGData.c.value_ == setGData.c.value) {
+    if (setGData.c.value_ == setGData.j) {
       setGData.c.value_ = setGData.c.valueDefault;
       setGData.e.bool = !setGData.e.bool;
     } else {

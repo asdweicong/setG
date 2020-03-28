@@ -1,11 +1,29 @@
 <!--pages/setG/setG.wxml-->
 <!-- <wxs module="filter" src="../../utils/filter.wxs"></wxs> -->
-<input type="number" name="tel" value="{{searchCode}}" confirm-type="search" bindconfirm="getSearchResult" bindblur="getSearchValue" bindinput="getSearchInput" class="searchCode"></input>
+<input type="number" name="tel" id="searchCode" value="{{searchCode}}" confirm-type="search" placeholder="请输入当前数据" bindconfirm="getSearchResult" bindblur="getSearchValue" bindinput="getSearchInput" class="searchCode"></input>
 <button bindtap="bindViewTapSetG">添加</button>
-<view>下期投注：{{setGData.h}}</view>
-<view>单期数量：{{setGData.a}}</view>
-<view>叠加倍数：{{setGData.b}}</view>
-<view>循环期数：{{setGData.c.value}}</view>
+<view>
+	下期投注：{{setGData.h}}
+</view>
+<radio-group class="radio-group" bindchange="radioChange">
+	<view>
+		单期数量：{{setGData.a}}
+		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[0]}}" checked=""></radio>
+	</view>
+	<view>
+		叠加倍数：{{setGData.b}}
+		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[1]}}" checked=""></radio>
+	</view>
+	<view>
+		循环期数：{{setGData.j}}
+		<radio class='radio' style='margin-left: 11px;' name="radio" value="{{checked.num[2]}}" checked=""></radio>
+	</view>
+	<view>
+		循环轮数：{{setGData.k}}
+		<radio class='radio' style='margin-left: 11px;' value="{{checked.num[3]}}" checked=""></radio>
+	</view>
+</radio-group>
+
 <view>总回报：{{setGData.d}}</view>
 <view>单双：{{setGData.e.value}}</view>
 <!-- <view>大小：{{setGData.f.value}}</view> -->
@@ -13,8 +31,6 @@
 <button bindtap="bindViewTapDeleteSetG" style="width:50%;float:right">清除缓存</button>
 <button bindtap="bindViewTapDetail" style="width:50%;float:right">进入详情</button>
 
-
-<view class='item' wx:for="{{setGData._data}}">
-  <!-- <view>value：{{item.value}}  大/小：{{sizeFilter(item.size)}}  单/双：{{singleAndDoubleFilter(item.singleAndDouble)}}</view> -->
-  <view>value：{{item.value}}{{item.singleAndDouble}}{{item.win}}----{{item.e.value}}</view>
-</view>
+<input type="number" name="tel" id="changeValue" value="{{changeValue}}" confirm-type="search" 
+placeholder="请输入需要修改的数据" bindconfirm="getSearchResult" bindblur="getSearchValue" bindinput="getSearchInput" class="searchCode width100"></input>
+<button bindtap="bindViewTapChange" class="width100">修改</button>

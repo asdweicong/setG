@@ -8,3 +8,15 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.width50{
+  width: 50%;
+}
+.width100{
+  width: 100%;
+}
+.floatLeft{
+  float: left;
+}
+.floatRight{
+  float: right;
+}
