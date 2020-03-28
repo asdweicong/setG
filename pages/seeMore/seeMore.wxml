@@ -1,5 +1,5 @@
 <wxs module="filter" src="../../utils/filter.wxs"></wxs>
 <view class='item' wx:for="{{setGData._data}}">
   <!-- <view>value：{{item.value}}  大/小：{{sizeFilter(item.size)}}  单/双：{{singleAndDoubleFilter(item.singleAndDouble)}}</view> -->
-  <view>value：{{item.value}}{{item.size}}{{item.singleAndDouble}}{{item.win}}----{{item.e.value}}{{item.f.value}}</view>
+  <view>value：{{item.value}}{{item.singleAndDouble}}{{item.win}}----{{item.e.value}}</view>
 </view>

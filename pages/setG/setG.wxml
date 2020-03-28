@@ -8,7 +8,13 @@
 <view>循环期数：{{setGData.c.value}}</view>
 <view>总回报：{{setGData.d}}</view>
 <view>单双：{{setGData.e.value}}</view>
-<view>大小：{{setGData.f.value}}</view>
+<!-- <view>大小：{{setGData.f.value}}</view> -->
 
 <button bindtap="bindViewTapDeleteSetG" style="width:50%;float:right">清除缓存</button>
 <button bindtap="bindViewTapDetail" style="width:50%;float:right">进入详情</button>
+
+
+<view class='item' wx:for="{{setGData._data}}">
+  <!-- <view>value：{{item.value}}  大/小：{{sizeFilter(item.size)}}  单/双：{{singleAndDoubleFilter(item.singleAndDouble)}}</view> -->
+  <view>value：{{item.value}}{{item.singleAndDouble}}{{item.win}}----{{item.e.value}}</view>
+</view>

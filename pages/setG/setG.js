@@ -2,7 +2,7 @@
 var setDefaultData = function () {
   return {
     a: 50, //单期数量
-    h: 0, //下注数量
+    h: 50, //下注数量
     b: 3, //叠加倍数
     i: 1, //叠加次数
     j: 2, //循环个数
@@ -18,12 +18,19 @@ var setDefaultData = function () {
       value: '单',
       bool: false //false-->单  true-->双
     }, //当前下注单双
-    f: {
-      value: '小',
-      bool: false //false-->小  true-->大
-    }, //当前下注大小
-    g: false, //false -->大小  、true -->单双
-    _data: [], //每期数
+    // f: {
+    //   value: '小',
+    //   bool: false //false-->小  true-->大
+    // }, //当前下注大小
+    g: false, //true -->大小  false -->单双
+    _data: [{
+      value: 1,
+      size: '小',
+      singleAndDouble: '单',
+      sizeWin: true,
+      singleAndDoubleWin: true,
+      win: true,
+    }], //每期数
   }
 };
 Page({
@@ -89,85 +96,70 @@ Page({
     this.setData(data)
   },
   bindViewTapSetG: function () {
-    console.log('bindViewTapSetG()');
     var data = this.data;
+    console.log('bindViewTapSetG()',data.searchCode);
+
     var object = {
-      value: this.data.searchCode,
-      size: this.data.searchCode < 5 ? '小' : '大',
-      singleAndDouble: (this.data.searchCode % 2 == 0) ? '双' : '单',
+      value: data.searchCode,
+      size: data.searchCode < 5 ? '小' : '大',
+      singleAndDouble: (data.searchCode % 2 == 0) ? '双' : '单',
       sizeWin: false,
       singleAndDoubleWin: false,
       win: false,
     }
     data.setGData._data.splice(0, 0, object);
+    data.setGData = this.setTheWin(data.setGData);
+    data.setGData = this.setAllWin(data.setGData);
+    data.setGData = this.setCAndE(data.setGData);
     data.setGData = this.setNextValue(data.setGData);
     this.setData(data);
     wx.setStorageSync('bindViewTapSetG', this.data.setGData)
   },
-  setNextValue: function (setGData) {
+  setCAndE:function(setGData){
     if (setGData.c.value_ == setGData.c.value) {
       setGData.c.value_ = setGData.c.valueDefault;
       setGData.e.bool = !setGData.e.bool;
-      setGData.f.bool = !setGData.f.bool;
     } else {
       setGData.c.value_++;
     }
-    console.log(setGData.c.value_)
     if (setGData.e.bool) {
       setGData.e.value = '双';
     } else {
       setGData.e.value = '单';
     }
-    if (setGData.f.bool) {
-      setGData.f.value = '小';
-    } else {
-      setGData.f.value = '大';
-    }
+    return setGData
+  },
+  setTheWin:function(setGData){
     setGData._data[0].e = JSON.parse(JSON.stringify(setGData.e));
-    setGData._data[0].f = JSON.parse(JSON.stringify(setGData.f));
-    try {
-      if (setGData._data[1].size == setGData.f.value) {
-        setGData._data[0].sizeWin = true
-      }
-      if (setGData._data[1].size == setGData.f.value) {
-        setGData._data[0].singleAndDoubleWin = true
-      }
-    } catch (error) {
-
-    }
-    if (setGData._data.g) {
-      if (setGData._data[0].sizeWin) {
-        setGData.i = 0;
-        setGData._data[0].win = true;
-      } else {
-        setGData.i++;
-      }
-    }
     if (!setGData._data.g) {
-      if (setGData._data[0].singleAndDoubleWin) {
-        setGData.i = 0;
-        setGData._data[0].win = true;
-      } else {
-        setGData.i++;
-      }
+      if (setGData._data[0].singleAndDouble == setGData.e.value) {
+        setGData._data[0].singleAndDoubleWin = true
+      }  
     }
-
+    return setGData;
+  },
+  setAllWin:function(setGData){
+    if (!setGData._data.g) {
+      setGData._data[0].win = setGData._data[0].singleAndDoubleWin;
+    }
+    return setGData;
+  },
+  setNextValue: function (setGData) {
+    console.log(setGData._data[0].win,setGData.i)
     if (setGData._data[0].win) {
       setGData.d += setGData.h
       setGData.h = setGData.a;
       setGData.i = 0;
     } else {
       setGData.d -= setGData.h
-      if (setGData.h == 0) {
-        setGData.h = setGData.a;
-      }
       if (setGData.i >= (setGData.j * setGData.k)) {
         setGData.h = setGData.a;
+        setGData.i = 0;
       } else {
+        setGData.i ++;
         setGData.h = setGData.h * setGData.b;
       }
     }
-    console.log(setGData)
     return setGData;
   },
   sizeFilter: function (value) {
@@ -189,6 +181,7 @@ Page({
   bindViewTapDeleteSetG: function () {
     console.log('bindViewTapDeleteSetG()');
     this.setData({
+      searchCode:0,
       setGData: new setDefaultData()
     });
     wx.removeStorage({
