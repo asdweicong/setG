@@ -10,9 +10,11 @@
 } 
 .width50{
   width: 50%;
+  box-sizing: border-box;
 }
 .width100{
   width: 100%;
+  box-sizing: border-box;
 }
 .floatLeft{
   float: left;

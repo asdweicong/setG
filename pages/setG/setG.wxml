@@ -3,7 +3,7 @@
 <input type="number" name="tel" id="searchCode" value="{{searchCode}}" confirm-type="search" placeholder="请输入当前数据" bindconfirm="getSearchResult" bindblur="getSearchValue" bindinput="getSearchInput" class="searchCode"></input>
 <button bindtap="bindViewTapSetG">添加</button>
 <view>
-	下期投注：{{setGData.h}}
+	当前数量：{{setGData.h}}
 </view>
 <radio-group class="radio-group" bindchange="radioChange">
 	<view>

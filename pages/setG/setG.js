@@ -2,7 +2,7 @@
 var setDefaultData = function () {
   return {
     a: 50, //单期数量
-    h: 50, //下注数量
+    h: 50, //当前数量
     b: 3, //叠加倍数
     i: 1, //叠加次数
     j: 2, //循环个数
@@ -16,11 +16,11 @@ var setDefaultData = function () {
     e: {
       value: '单',
       bool: false //false-->单  true-->双
-    }, //当前下注单双
+    }, //当前单双
     // f: {
     //   value: '小',
     //   bool: false //false-->小  true-->大
-    // }, //当前下注大小
+    // }, //当前大小
     g: false, //true -->大小  false -->单双
     _data: [{
       value: 1,
@@ -95,6 +95,7 @@ Page({
   },
   getSearchInput(e) {
     this[e.currentTarget.id] = e.detail.value;
+    this.getSaveSearchValue(e.currentTarget.id, this[e.currentTarget.id])
   },
   getSearchValue(e) {
     this.getSaveSearchValue(e.currentTarget.id, this[e.currentTarget.id])
@@ -113,6 +114,7 @@ Page({
     switch (checked.value){
       case 1:{
         data.setGData.a = changeValue
+        data.setGData.h = changeValue
         break;
       }
       case 2:{
@@ -137,6 +139,7 @@ Page({
 
     var object = {
       value: data.searchCode,
+      h: data.setGData.h,//每期数量
       size: data.searchCode < 5 ? '小' : '大',
       singleAndDouble: (data.searchCode % 2 == 0) ? '双' : '单',
       sizeWin: false,
@@ -170,7 +173,7 @@ Page({
     if (!setGData._data.g) {
       if (setGData._data[0].singleAndDouble == setGData.e.value) {
         setGData._data[0].singleAndDoubleWin = true
-      }  
+      }
     }
     return setGData;
   },
@@ -181,16 +184,16 @@ Page({
     return setGData;
   },
   setNextValue: function (setGData) {
-    console.log(setGData._data[0].win,setGData.i)
+    console.log(setGData._data[0].win,setGData.i,setGData.j * setGData.k)
     if (setGData._data[0].win) {
       setGData.d += setGData.h
       setGData.h = setGData.a;
-      setGData.i = 0;
+      setGData.i = 1;
     } else {
       setGData.d -= setGData.h
       if (setGData.i >= (setGData.j * setGData.k)) {
         setGData.h = setGData.a;
-        setGData.i = 0;
+        setGData.i = 1;
       } else {
         setGData.i ++;
         setGData.h = setGData.h * setGData.b;
